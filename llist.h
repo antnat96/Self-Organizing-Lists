@@ -10,16 +10,9 @@
 // Third Edition (C++)" by Clifford A. Shaffer.
 // Source code Copyright (C) 2007-2011 by Clifford A. Shaffer.
 
-// This is the file to include in your code if you want access to the
-// complete LList template class
-
-// First, get the declaration for the base list class
-#include "list.h"
-
-// This is the declaration for LList. It is split into two parts
-// because it is too big to fit on one book page
 // Linked list implementation
-template <typename E> class LList: public List<E> {
+template <typename E> 
+class LList: public List<E> {
 private:
   Link<E>* head;       // Pointer to list header
   Link<E>* tail;       // Pointer to last element

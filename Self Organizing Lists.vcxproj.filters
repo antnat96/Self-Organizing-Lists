@@ -21,9 +21,6 @@
     <ClInclude Include="link.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="llist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -31,6 +28,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SelfOrderedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

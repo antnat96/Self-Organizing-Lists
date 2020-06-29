@@ -8,51 +8,82 @@
 #ifndef SELFORDEREDLIST_H
 #define	SELFORDEREDLIST_H
 
+#include <string>
+#include "llist.h"
 #include "SelfOrderedListADT.h"
 
-template <typename E> class SelfOrderedList : public SelfOrderedListADT<E> {
+template <typename E> 
+class SelfOrderedList: public SelfOrderedListADT<E> {
+
+private:
+
+	int compareCount;
+	int linkedListSize;
+	//LList<E> linkedList = new LList<E>();
+
+	void reorder(int n) {
+		if (n == 0) { // Count
+
+		}
+		else if (n == 1) { // MTF
+
+		}
+		else if (n == 2) { // Transpose
+
+		}
+		return;
+	}
 
 public:
-    //Default constructor/destructor
-    SelfOrderedList(){}
-    ~SelfOrderedList() {}
-    
-    //Look for 'it'.  If found return true and execute the self-ordering
-    //heuristic used for ordering the list: count, move-to-front, or transpose.
-    //Increments the compare instance variable every time it compares 'it' to
-    //other members of the list. Returns true if 'it' is found.
-	bool find(const E& it) {
-	
+
+    SelfOrderedList() {
+		cout << "check" << endl;
+		linkedList = new LList();
+
+	}
+    ~SelfOrderedList() {
+
 	}
     
-    //Called by find if 'it' is not in the list. Adds the new 'it' to the list
+	bool find(const E& it) {
+		// Look for "it"
+		// Increment the compare instance variable each time "it" is compared to another member of the list
+		// if found
+			// execute self ordering heuristic
+			// Return true
+		// else {
+			// add(it);
+		// }
+		return true;
+	}
+    
     //Can also be called independently when initially loading the list with
     //unique values and when you want to load the list in the order 'it' is 
     //read without your re-order method being called (or the number of compares
     //being incremented.
-	void add(const E& it) {  //Add new 'it' to the list
+	void add(const E& it) {  // Called by find if "it" is not in the list
+		// Add new 'it' to the list
+
 
 	}
 
 	int getCompares() const {  //Returns the number of accumulated compares
-
+		return compareCount;
 	}
 
-	int size() const {       //Returns the size of the list
-
+	int size() const { //Returns the size of the list
+		return linkedListSize;
 	}
     
-    //Print the list
-    //In order print of the list.  printlist() prints the entire list
-    //whereas printlist(n) prints n nodes.
+    // In order print of the list
 	void printlist() {
 
 	}
 
+	// prints n nodes.
 	void printlist(int n) {
 
 	}
-    
 };
 
 

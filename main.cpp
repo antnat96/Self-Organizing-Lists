@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include "SelfOrderedList.h"
 
 using namespace std;
@@ -13,7 +14,14 @@ using namespace std;
 int main() {
 
 	cout << "Anthony Natale -- CSIS 215 Programming Assignment 4 -- Self Organizing List" << "\n" << endl;
-	
+
+	SelfOrderedList<char> charList = SelfOrderedList<char>();
+
+	//SelfOrderedList<string> strList = SelfOrderedList<string>();
+
+	//SelfOrderedList<string> fileList = SelfOrderedList<string>();
+
+
 	// Close program
 	cout << endl << endl;
 	system("pause");
