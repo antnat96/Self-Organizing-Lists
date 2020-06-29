@@ -14,8 +14,8 @@ template <typename E> class SelfOrderedList : public SelfOrderedListADT<E> {
 
 public:
     //Default constructor/destructor
-    SelfOrderedListADT(){}
-    ~SelfOrderedListADT() {}
+    SelfOrderedList(){}
+    ~SelfOrderedList() {}
     
     //Look for 'it'.  If found return true and execute the self-ordering
     //heuristic used for ordering the list: count, move-to-front, or transpose.

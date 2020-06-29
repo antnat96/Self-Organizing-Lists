@@ -5,9 +5,8 @@
  * Created on 6/28/2020
  */
 
-#include <fstream>
-#include "book.h"
-
+#include <iostream>
+#include "SelfOrderedList.h"
 
 using namespace std;
 
