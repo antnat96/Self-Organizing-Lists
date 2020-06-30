@@ -45,9 +45,10 @@ public:
     
 	bool find(const E& it) {
 		// Look for "it"
-		E test = linkedList->getValue();
-		cout << "check" << endl;
-		//while (linkedList->curr()->value())
+		//E temp = linkedList->curr;
+		//while (temp->getValue() != it) {
+		//	temp = temp->next();
+		//}
 
 		//for (int i = 0; i < linkedList->cnt(); i++) {
 		//	// if found
