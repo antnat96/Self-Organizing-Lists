@@ -19,7 +19,7 @@ private:
 
 	int compareCount;
 	int linkedListSize;
-	//LList<E> linkedList = new LList<E>();
+	LList<E>* linkedList;
 
 	void reorder(int n) {
 		if (n == 0) { // Count
@@ -37,9 +37,7 @@ private:
 public:
 
     SelfOrderedList() {
-		cout << "check" << endl;
-		linkedList = new LList();
-
+		linkedList = new LList<E>();
 	}
     ~SelfOrderedList() {
 
@@ -47,13 +45,22 @@ public:
     
 	bool find(const E& it) {
 		// Look for "it"
-		// Increment the compare instance variable each time "it" is compared to another member of the list
-		// if found
-			// execute self ordering heuristic
-			// Return true
-		// else {
-			// add(it);
-		// }
+		E test = linkedList->getValue();
+		cout << "check" << endl;
+		//while (linkedList->curr()->value())
+
+		//for (int i = 0; i < linkedList->cnt(); i++) {
+		//	// if found
+		//		// execute self ordering heuristic
+		//	// Return true
+		//	// else {
+		//		// add(it);
+		//	// }
+
+		//	// Increment the compare instance variable each time "it" is compared to another member of the list
+		//	compareCount++;
+		//}
+
 		return true;
 	}
     
