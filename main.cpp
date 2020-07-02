@@ -28,10 +28,10 @@ int main() {
 	const char *toFind = "FDFGEGFADFGEHI";
 	for (int i = 0; i < 14; i++) {
 		if (charList.find(toFind[i])) {
-			cout << toFind[i] << " is in the list" << endl;
+			cout << toFind[i] << " is in the lists" << endl;
 		}
 		else {
-			cout << toFind[i] << " is NOT in the list" << endl;
+			cout << toFind[i] << " is NOT in the lists" << endl;
 		}
 	}
 
