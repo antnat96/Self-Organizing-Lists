@@ -17,66 +17,107 @@ class SelfOrderedList: public SelfOrderedListADT<E> {
 
 private:
 
-	int compareCount;
-	int linkedListSize;
-	LList<E>* linkedList;
+	// Arrays Legend:
+	// 0: Count heuristic
+	// 1: Move-To-Front heuristic
+	// 2: Transpose heuristic
 
-	void reorder(int n) {
-		if (n == 0) { // Count
+	LList<E>* list[3];
+	int compareCount[3];
+	int listSize;
+	
+	void reorder(int i) {
+		if (i == 0) reorderCount();
+		else if (i == 1) reorderMTF();
+		else if (i == 2) reorderTranspose();
+		return;
+	}
 
-		}
-		else if (n == 1) { // MTF
+	void reorderCount() {
+		cout << "count" << endl;
+		return;
+	}
 
-		}
-		else if (n == 2) { // Transpose
+	void reorderMTF() {
+		cout << "mtf" << endl;
+		return;
+	}
 
-		}
+	void reorderTranspose() {
+		cout << "Transpose" << endl;
 		return;
 	}
 
 public:
 
     SelfOrderedList() {
-		linkedList = new LList<E>();
+		for (int i = 0; i < 3; i++) {
+			list[i] = new LList<E>();
+			compareCount[i] = 0;
+		}
+		
 	}
     ~SelfOrderedList() {
-
+		//for (int i = 0; i < 3; i++) {
+		//	list[i]->removeall();
+		//}
 	}
     
 	// This function compares "it" with the values in the list
 	// and returns true if the value is found, 
 	// else it returns false
 	bool find(const E& it) {
-		// Move to the front of the list
-		linkedList->moveToStart();
+
+		// Bool to track if search fails at any point and "it" cannot be found
+		bool itIsInList = true;
+
 		// Check if list is uninitialized
-		if (linkedList->isNull()) {
-			// Add it
-			add(it);
-			return false;
-		}
-		// Declare a temp variable of type E
-		E val;
-		// fill temp with the current value of the list
-		val = linkedList->getValue();
-
-		// Check temp against the value being searched for
-		while (val != it) {
-			// Increment compareCount
-			compareCount++;
-			// If temp isn't it, move the linked list to the next item in the list
-			linkedList->next();
-			// Check if we've reached the end of the list, if so, "it" is not in the list, return false
-			if (linkedList->isNull()) { 
-				// Add it
-				add(it);
-				return false; 
+		for (int i = 0; i < 3; i++) {
+			if (list[i]->isNull()) {
+				// Add it to each list
+				list[i]->append(it);
+				// And mark the lists as uninitialized before moving to the next list
+				itIsInList = false;
 			}
-			// Reassign temp
-			val = linkedList->getValue();
 		}
-
-		return true;
+		
+		// If the list was previously null, return false, we're done here
+		if (itIsInList == false) {
+			return itIsInList;
+		}
+		// Otherwise, the lists are populated and we need to search for "it"
+		else {
+			// Declare an array whose variables are of type E (char or string)
+			E val[3];
+			for (int i = 0; i < 3; i++) {
+				// Move to the front of the lists to prepare for the search
+				list[i]->moveToStart();
+				// fill val array with the current value of the list being searched
+				val[i] = list[i]->getValue();
+				// Check temp against "it"
+				while (val[i] != it) {
+					// Increment compareCount
+					compareCount[i]++;
+					// If temp isn't it, move the linked list to the next item in the list
+					list[i]->next();
+					// Check if we've reached the end of the list, if so, add "it" to the end of the list and return false
+					// because "it" wasn't previously in the list
+					if (list[i]->isNull()) {
+						// Add it
+						list[i]->append(it);
+						itIsInList = false;
+						break; // break out of the while loop - no need to reassign value if we've already determined it's not in the list
+					}
+					// Reassign val for next iteration of while loop
+					val[i] = list[i]->getValue();
+				}
+				// When "it" is found in a list, reorder that list according to its heuristic
+				reorder(i);
+				// And then continue to the next list to do the same thing
+			}
+		}		
+		// Return true if the value was previously in the list and false if it had to be added
+		return itIsInList;
 	}
     
     //Can also be called independently when initially loading the list with
@@ -84,16 +125,19 @@ public:
     //read without your re-order method being called (or the number of compares
     //being incremented.
 	void add(const E& it) {  // Called by find if "it" is not in the list
-		// Add new 'it' to the list
-		linkedList->append(it);
+		// Add "it" to the lists
+		for (int i = 0; i < 3; i++) {
+			list[i]->append(it);
+		}
 	}
 
 	int getCompares() const {  //Returns the number of accumulated compares
-		return compareCount;
+		//return compareCount;
+		return 1;
 	}
 
 	int size() const { //Returns the size of the list
-		return linkedListSize;
+		return listSize;
 	}
     
     // In order print of the list

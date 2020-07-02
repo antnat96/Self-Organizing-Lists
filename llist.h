@@ -108,6 +108,10 @@ public:
 	  if (curr->next == NULL) return true;
 	  return false;
   }
+
+  int getCount() {
+	  return curr->count;
+  }
 };
 
 #endif
