@@ -103,6 +103,11 @@ public:
     Assert(curr->next != NULL, "No value");
     return curr->next->element;
   }
+
+  bool isNull() {
+	  if (curr->next == NULL) return true;
+	  return false;
+  }
 };
 
 #endif

@@ -43,24 +43,38 @@ public:
 
 	}
     
+	// This function compares "it" with the values in the list
+	// and returns true if the value is found, 
+	// else it returns false
 	bool find(const E& it) {
-		// Look for "it"
-		//E temp = linkedList->curr;
-		//while (temp->getValue() != it) {
-		//	temp = temp->next();
-		//}
+		// Move to the front of the list
+		linkedList->moveToStart();
+		// Check if list is uninitialized
+		if (linkedList->isNull()) {
+			// Add it
+			add(it);
+			return false;
+		}
+		// Declare a temp variable of type E
+		E val;
+		// fill temp with the current value of the list
+		val = linkedList->getValue();
 
-		//for (int i = 0; i < linkedList->cnt(); i++) {
-		//	// if found
-		//		// execute self ordering heuristic
-		//	// Return true
-		//	// else {
-		//		// add(it);
-		//	// }
-
-		//	// Increment the compare instance variable each time "it" is compared to another member of the list
-		//	compareCount++;
-		//}
+		// Check temp against the value being searched for
+		while (val != it) {
+			// Increment compareCount
+			compareCount++;
+			// If temp isn't it, move the linked list to the next item in the list
+			linkedList->next();
+			// Check if we've reached the end of the list, if so, "it" is not in the list, return false
+			if (linkedList->isNull()) { 
+				// Add it
+				add(it);
+				return false; 
+			}
+			// Reassign temp
+			val = linkedList->getValue();
+		}
 
 		return true;
 	}
@@ -71,8 +85,7 @@ public:
     //being incremented.
 	void add(const E& it) {  // Called by find if "it" is not in the list
 		// Add new 'it' to the list
-
-
+		linkedList->append(it);
 	}
 
 	int getCompares() const {  //Returns the number of accumulated compares
