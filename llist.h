@@ -116,6 +116,37 @@ public:
   int incrementCount() {
 	  return curr->incrementCount();
   }
+  void transpose(int accessedElementPos) {
+	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
+	  moveToPos(accessedElementPos);
+
+	  // Get some pointers
+	  Link<E>* oneElementBeforeCurr = getPrev();
+	  Link<E>* twoElementsBeforeCurr = getTwoPrev();
+	  Link<E>* tempNext = curr->next;
+
+	  // Make the swaps
+	  twoElementsBeforeCurr->assignNext(curr);
+	  oneElementBeforeCurr->assignNext(tempNext);
+	  curr->assignNext(oneElementBeforeCurr);
+	  return;
+  }
+
+  Link<E> * getPrev() {
+	  if (curr == head) return head;       // No previous element
+	  Link<E>* temp = head;
+	  // March down list until we find the previous element
+	  while (temp->next != curr) temp = temp->next;
+	  return temp;
+  }
+
+  Link<E> * getTwoPrev() {
+	  if (curr == head) return head;       // No previous element
+	  Link<E>* temp = head;
+	  // March down list until we find the previous element
+	  while (temp->next->next != curr) temp = temp->next;
+	  return temp;
+  }
 };
 
 #endif

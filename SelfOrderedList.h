@@ -26,21 +26,15 @@ private:
 	int compareCount[3];
 	int listSize;
 	
-	void reorder(int i, const E& it, int pos = 0) {
+	void reorder(int i, const E& it, int accessedElementPos = 0) {
 		if (i == 0) {
-			// Go to the front
-			list[0]->moveToStart();
-			// Reorder the list
-			// Reorder the list
 			reorderCount(it);
 		}
 		else if (i == 1) {
-			list[1]->moveToStart();
-			reorderMTF(pos);
+			reorderMTF(accessedElementPos);
 		}
 		else if (i == 2) {
-			list[2]->moveToStart();
-			reorderTranspose(it);
+			reorderTranspose(accessedElementPos);
 		}
 		return;
 	}
@@ -60,11 +54,22 @@ private:
 	}
 
 	void reorderMTF(int pos) {
-		
+
+		// REMOVE FROM LINEUP
+		// Go to the position of the found item
+		// Get a reference to the found item
+		// Get a reference to the "next" pointer
+		// Go to the previous position (one left)
+		// Assign the next pointer to the previously caught "next" pointer
+
+		// REINSERT AS HEAD
+		// Assign the "next" of the found item reference to the head
+		return;
 	}
 
-	void reorderTranspose(const E& it) {
-		cout << "Transpose" << endl;
+	void reorderTranspose(int accessedElementPos) {
+		// run transpose
+		list[2]->transpose(accessedElementPos);
 		return;
 	}
 
@@ -115,8 +120,8 @@ public:
 				list[i]->moveToStart();
 				// fill val array with the current value of the list being searched
 				val[i] = list[i]->getValue();
-				// Get the position of the found item
-				int pos = 0;
+				// Get the position of the found item, skipping head
+				int pos = 1;
 				// Check temp against "it"
 				while (val[i] != it) {
 					// Increment compareCount and pos

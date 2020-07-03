@@ -31,8 +31,12 @@ public:
   int getCount() {
 	  return count;
   }
-  void assignNext(Link* nextVal) {
-
+  void assignNext(Link* nextVal = NULL) {
+	  next = nextVal;
+	  cout << "Assigned" << endl;
+  }
+  E getVal() const {
+	  return element;
   }
 
 };
