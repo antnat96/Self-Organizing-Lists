@@ -26,50 +26,16 @@ private:
 	int compareCount[3];
 	int listSize;
 	
-	void reorder(int i, const E& it, int accessedElementPos = 0) {
+	void reorder(int i, int accessedElementPos = 0) {
 		if (i == 0) {
-			reorderCount(it);
+			//list[0]->reorderCount(accessedElementPos);
 		}
 		else if (i == 1) {
-			reorderMTF(accessedElementPos);
+			//list[1]->moveToFront(accessedElementPos);
 		}
 		else if (i == 2) {
-			reorderTranspose(accessedElementPos);
+			list[2]->transpose(accessedElementPos);
 		}
-		return;
-	}
-
-	void reorderCount(const E& it) {
-		// if (!(list[0]->isNull())) {
-			// Move to the start of the list
-			// Increment and return the count variable for that item in the list
-			//int currCount = list[0]->incrementCount();
-			//list[0]->next();
-			//int nextCount = list[0]->getCount();
-			//if (nextCount > currCount) {
-			//}
-		// }
-		// At the end of the list, give control back to reorder() function
-		return;
-	}
-
-	void reorderMTF(int pos) {
-
-		// REMOVE FROM LINEUP
-		// Go to the position of the found item
-		// Get a reference to the found item
-		// Get a reference to the "next" pointer
-		// Go to the previous position (one left)
-		// Assign the next pointer to the previously caught "next" pointer
-
-		// REINSERT AS HEAD
-		// Assign the "next" of the found item reference to the head
-		return;
-	}
-
-	void reorderTranspose(int accessedElementPos) {
-		// run transpose
-		list[2]->transpose(accessedElementPos);
 		return;
 	}
 
@@ -140,7 +106,7 @@ public:
 					val[i] = list[i]->getValue();
 				}
 				// When "it" is found in a list, reorder that list according to its heuristic
-				reorder(i, it, pos);
+				reorder(i, pos);
 				// And then continue to the next list to do the same thing
 			}
 		}		
