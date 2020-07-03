@@ -32,24 +32,19 @@ int main() {
 
 	charList.printlist();
 
-	//SelfOrderedList<string> strList = SelfOrderedList<string>();
+	SelfOrderedList<string> strList = SelfOrderedList<string>();
 
-	//// Open file stream
-	//ifstream input;
-	//input.open("test.txt");
-	//// Declare word variable
-	//string word;
-	//// separates words by whitespace
-	//while (input >> word) {
-	//	strList.find(word);
-	//}
+	// Open file stream
+	ifstream input;
+	input.open("test.txt");
+	// Declare word variable
+	string word;
+	// separates words by whitespace
+	while (input >> word) {
+		strList.find(word);
+	}
 
-	//for (int i = 0; i < 8; i++) {
-	//	strList.add(it2);
-	//}
-
-	//SelfOrderedList<string> fileList = SelfOrderedList<string>();
-
+	strList.printlist(10);
 
 	// Close program
 	cout << endl << endl;

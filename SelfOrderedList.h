@@ -59,54 +59,44 @@ public:
 		// Bool to track if search fails at any point and "it" cannot be found
 		bool itIsInList = true; bool added = false;
 
-		// Check if list is uninitialized
-		//for (int i = 0; i < 3; i++) {
-		//	if (list[i]->isNull()) {
-		//		// Add it to each list
-		//		list[i]->append(it);
-		//		// And mark the lists as uninitialized before moving to the next list
-		//		itIsInList = false;
-		//	}
-		//}
-		
-		// If the list was previously null, return false, we're done here
-		//if (itIsInList == false) {
-		//	return itIsInList;
-		//}
+		// Initial case for file/string test
+		if (list[0]->isEmpty()) {
+			add(it);
+			return false;
+		}
+
 		// Otherwise, the lists are populated and we need to search for "it"
-		//else {
-			// Declare an array whose variables are of type E (char or string)
-			E val[3];
-			for (int i = 0; i < 3; i++) {
-				// Move to the front of the lists to prepare for the search
-				list[i]->moveToStart();
-				// fill val array with the current value of the list being searched
-				val[i] = list[i]->getValue();
-				// Get the position of the found item, skipping head
-				int pos = 1;
-				// Check temp against "it"
-				while (val[i] != it) {
-					// Increment compareCount and pos
-					compareCount[i]++; pos++;
-					// If temp isn't it, move the linked list to the next item in the list
-					list[i]->next();
-					// Check if we've reached the end of the list, if so, add "it" to the end of the list and return false
-					// because "it" wasn't previously in the list
-					if (list[i]->isTail()) {
-						// Add it
-						list[i]->append(it);
-						added = true;
-						itIsInList = false;
-						break; // break out of the while loop - no need to reassign value if we've already determined it's not in the list
-					}
-					// Reassign val for next iteration of while loop
-					val[i] = list[i]->getValue();
+		// Declare an array whose variables are of type E (char or string)
+		E val[3];
+		for (int i = 0; i < 3; i++) {
+			// Move to the front of the lists to prepare for the search
+			list[i]->moveToStart();
+			// fill val array with the current value of the list being searched
+			val[i] = list[i]->getValue();
+			// Get the position of the found item, skipping head
+			int pos = 1;
+			// Check temp against "it"
+			while (val[i] != it) {
+				// Increment compareCount and pos
+				compareCount[i]++; pos++;
+				// If temp isn't it, move the linked list to the next item in the list
+				list[i]->next();
+				// Check if we've reached the end of the list, if so, add "it" to the end of the list and return false
+				// because "it" wasn't previously in the list
+				if (list[i]->isTail()) {
+					// Add it
+					list[i]->append(it);
+					added = true;
+					itIsInList = false;
+					break; // break out of the while loop - no need to reassign value if we've already determined it's not in the list
 				}
-				// When "it" is found in a list, reorder that list according to its heuristic
-				reorder(i, pos);
-				// And then continue to the next list to do the same thing
+				// Reassign val for next iteration of while loop
+				val[i] = list[i]->getValue();
 			}
-		//}		
+			// When "it" is found in a list, reorder that list according to its heuristic
+			reorder(i, pos);
+			// And then continue to the next list to do the same thing
+		}
 		// Return true if the value was previously in the list and false if it had to be added
 		return itIsInList;
 	}
@@ -146,12 +136,26 @@ public:
 		cout << "Transpose Heuristic: Size of List: " << list[2]->sizeOfList() << endl;
 		cout << "Number of Compares: " << compareCount[2] << endl;
 		list[2]->print();
-		cout << "\n";
+		cout << "\n\n";
 
 	}
 
 	// prints n nodes.
 	void printlist(int n) {
+		cout << "Count Heuristic: Size of List: " << list[0]->sizeOfList() << endl;
+		cout << "Number of Compares: " << compareCount[0] << endl;
+		list[0]->printFinite(n);
+		cout << "\n\n";
+
+		cout << "MTF Heuristic: Size of List: " << list[1]->sizeOfList() << endl;
+		cout << "Number of Compares: " << compareCount[1] << endl;
+		list[1]->printFinite(n);
+		cout << "\n\n";
+
+		cout << "Transpose Heuristic: Size of List: " << list[2]->sizeOfList() << endl;
+		cout << "Number of Compares: " << compareCount[2] << endl;
+		list[2]->printFinite(n);
+		cout << "\n";
 
 	}
 };

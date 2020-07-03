@@ -42,7 +42,15 @@ public:
 		  cout << getValue() << "-" << curr->next->count << " ";
 		  curr = curr->next;
 	  }
-  }; 
+  };
+
+  void printFinite(int n) { // Prints 10 nodes
+	  moveToStart();
+	  for (int i = 0; i < n; i++) {
+		  cout << getValue() << "-" << curr->next->count << " ";
+		  curr = curr->next;
+	  }
+  }
 
   void clear() { // Clear list
 	  removeall(); 
@@ -119,6 +127,15 @@ public:
 	  if (curr->next == NULL) return true;
 	  return false;
   }
+  
+  bool isEmpty() {
+	  if (head->next == NULL) {
+		  return true;
+	  }
+	  else {
+		  return false;
+	  }
+  }
 
   int getCount() {
 	  return curr->getCount();
@@ -176,13 +193,16 @@ public:
   void reorderCount(int accessedElementPos) {
 	  // Get to the item accessed
 	  moveToPos(accessedElementPos);
+	  if (accessedElementPos > 156) {
+		  int i = 0;
+	  }
 	  // Increment the count for that item
 	  int currCount = curr->incrementCount();
 	  if (curr == head || curr == head->next) return; // The item accessed is the first item, no changes
 	  // Reorder according to the count variable
 	  // Get a pointer to the previous element
 	  Link<E>* prev = getPrev();
-	  if (prev->count >= curr->count && curr->next->count <= curr->count) return;
+	  if (prev->count >= curr->count && (curr->next == NULL || curr->next->count <= curr->count)) return;
 	  Link<E>* tempPrev = prev;
 	  Link<E>* tempNext2 = curr->next;
 	  // While the previous element's count is lower, keep going left
@@ -194,6 +214,9 @@ public:
 	  prev->assignNext(curr);
 	  curr->assignNext(tempNext);
 	  tempPrev->assignNext(tempNext2);
+	  if (curr == nullptr) {
+		  cout << "test" << endl;
+	  }
 
 	  // Reassign the tail
 	  moveToPos(cnt);
