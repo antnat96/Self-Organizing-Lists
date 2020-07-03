@@ -28,14 +28,8 @@ public:
 	  count++;
 	  return count;
   }
-  int getCount() {
-	  return count;
-  }
   void assignNext(Link* nextVal = NULL) {
 	  next = nextVal;
-  }
-  E getVal() const {
-	  return element;
   }
 
 };

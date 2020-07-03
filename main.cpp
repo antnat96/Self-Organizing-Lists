@@ -26,14 +26,11 @@ int main() {
 
 	// Find function
 	const char *toFind = "FDFGEGFADFGEHI";
-	for (int i = 0; i < 14; i++) {
-		if (charList.find(toFind[i])) {
-			cout << toFind[i] << " is in the lists" << endl;
-		}
-		else {
-			cout << toFind[i] << " is NOT in the lists" << endl;
-		}
+	for (int i = 0; i <= 13; i++) {
+		charList.find(toFind[i]);
 	}
+
+	charList.printlist();
 
 	//SelfOrderedList<string> strList = SelfOrderedList<string>();
 

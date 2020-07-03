@@ -24,17 +24,16 @@ private:
 
 	LList<E>* list[3];
 	int compareCount[3];
-	int listSize;
 	
 	void reorder(int i, int accessedElementPos = 0) {
 		if (i == 0) {
 			list[0]->reorderCount(accessedElementPos);
 		}
 		else if (i == 1) {
-			//list[1]->moveToFront(accessedElementPos);
+			list[1]->moveToFront(accessedElementPos);
 		}
 		else if (i == 2) {
-			//list[2]->transpose(accessedElementPos);
+			list[2]->transpose(accessedElementPos);
 		}
 		return;
 	}
@@ -49,9 +48,7 @@ public:
 		
 	}
     ~SelfOrderedList() {
-		//for (int i = 0; i < 3; i++) {
-		//	list[i]->removeall();
-		//}
+
 	}
     
 	// This function compares "it" with the values in the list
@@ -60,28 +57,27 @@ public:
 	bool find(const E& it) {
 
 		// Bool to track if search fails at any point and "it" cannot be found
-		bool itIsInList = true;
+		bool itIsInList = true; bool added = false;
 
 		// Check if list is uninitialized
-		for (int i = 0; i < 3; i++) {
-			if (list[i]->isNull()) {
-				// Add it to each list
-				list[i]->append(it);
-				// And mark the lists as uninitialized before moving to the next list
-				itIsInList = false;
-			}
-		}
+		//for (int i = 0; i < 3; i++) {
+		//	if (list[i]->isNull()) {
+		//		// Add it to each list
+		//		list[i]->append(it);
+		//		// And mark the lists as uninitialized before moving to the next list
+		//		itIsInList = false;
+		//	}
+		//}
 		
 		// If the list was previously null, return false, we're done here
-		if (itIsInList == false) {
-			return itIsInList;
-		}
+		//if (itIsInList == false) {
+		//	return itIsInList;
+		//}
 		// Otherwise, the lists are populated and we need to search for "it"
-		else {
+		//else {
 			// Declare an array whose variables are of type E (char or string)
 			E val[3];
-			//for (int i = 0; i < 3; i++) {
-			for (int i = 1; i < 3; i++) {
+			for (int i = 0; i < 3; i++) {
 				// Move to the front of the lists to prepare for the search
 				list[i]->moveToStart();
 				// fill val array with the current value of the list being searched
@@ -96,9 +92,10 @@ public:
 					list[i]->next();
 					// Check if we've reached the end of the list, if so, add "it" to the end of the list and return false
 					// because "it" wasn't previously in the list
-					if (list[i]->isNull()) {
+					if (list[i]->isTail()) {
 						// Add it
 						list[i]->append(it);
+						added = true;
 						itIsInList = false;
 						break; // break out of the while loop - no need to reassign value if we've already determined it's not in the list
 					}
@@ -109,7 +106,7 @@ public:
 				reorder(i, pos);
 				// And then continue to the next list to do the same thing
 			}
-		}		
+		//}		
 		// Return true if the value was previously in the list and false if it had to be added
 		return itIsInList;
 	}
@@ -131,11 +128,25 @@ public:
 	}
 
 	int size() const { //Returns the size of the list
-		return listSize;
+		return list[0]->sizeOfList();
 	}
     
     // In order print of the list
 	void printlist() {
+		cout << "Count Heuristic: Size of List: " << list[0]->sizeOfList() << endl;
+		cout << "Number of Compares: " << compareCount[0] << endl;
+		list[0]->print();
+		cout << "\n\n";
+
+		cout << "MTF Heuristic: Size of List: " << list[1]->sizeOfList() << endl;
+		cout << "Number of Compares: " << compareCount[1] << endl;
+		list[1]->print();
+		cout << "\n\n";
+
+		cout << "Transpose Heuristic: Size of List: " << list[2]->sizeOfList() << endl;
+		cout << "Number of Compares: " << compareCount[2] << endl;
+		list[2]->print();
+		cout << "\n";
 
 	}
 

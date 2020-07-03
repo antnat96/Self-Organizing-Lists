@@ -35,8 +35,19 @@ private:
 public:
   LList() { init(); }    // Constructor
   ~LList() { removeall(); }                   // Destructor
-  void print() const;                // Print list contents
-  void clear() { removeall(); init(); }       // Clear list
+
+  void print() { // Print list contents
+	  moveToStart();
+	  for (int i = 0; i < cnt; i++) {
+		  cout << getValue() << "-" << curr->next->count << " ";
+		  curr = curr->next;
+	  }
+  }; 
+
+  void clear() { // Clear list
+	  removeall(); 
+	  init(); 
+  }       
 
   // Insert "it" at current position
   void insert(const E& it) {
@@ -104,7 +115,7 @@ public:
     return curr->next->element;
   }
 
-  bool isNull() {
+  bool isTail() {
 	  if (curr->next == NULL) return true;
 	  return false;
   }
@@ -113,12 +124,17 @@ public:
 	  return curr->getCount();
   }
 
+  int sizeOfList() {
+	  return cnt;
+  }
+
   int incrementCount() {
 	  return curr->incrementCount();
   }
   void transpose(int accessedElementPos) {
-	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
 	  moveToPos(accessedElementPos);
+	  int currCount = curr->incrementCount();
+	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
 
 	  // Get some pointers
 	  Link<E>* oneElementBeforeCurr = getPrev();
@@ -129,29 +145,15 @@ public:
 	  twoElementsBeforeCurr->assignNext(curr);
 	  oneElementBeforeCurr->assignNext(tempNext);
 	  curr->assignNext(oneElementBeforeCurr);
+	  // Reassign the tail
+	  moveToPos(cnt);
+	  tail = curr;
+	  tail->assignNext(NULL);
 	  return;
   }
 
   void moveToFront(int accessedElementPos) {
-	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
 	  moveToPos(accessedElementPos);
-
-	  // Get some pointers
-	  Link<E>* oneElementBeforeCurr = getPrev();
-	  Link<E>* previousStart = head->next;
-	  Link<E>* tempNext = curr->next;
-
-	  // Make the swaps
-	  curr->assignNext(previousStart);
-	  head->assignNext(curr);
-	  oneElementBeforeCurr->assignNext(tempNext);
-	  return;
-  }
-
-  void reorderCount(int accessedElementPos) {
-	  // Get to the element accessed
-	  moveToPos(accessedElementPos);
-	  // Increment the count for that item
 	  int currCount = curr->incrementCount();
 	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
 
@@ -164,6 +166,39 @@ public:
 	  curr->assignNext(previousStart);
 	  head->assignNext(curr);
 	  oneElementBeforeCurr->assignNext(tempNext);
+	  // Reassign the tail
+	  moveToPos(cnt);
+	  tail = curr;
+	  tail->assignNext(NULL);
+	  return;
+  }
+
+  void reorderCount(int accessedElementPos) {
+	  // Get to the item accessed
+	  moveToPos(accessedElementPos);
+	  // Increment the count for that item
+	  int currCount = curr->incrementCount();
+	  if (curr == head || curr == head->next) return; // The item accessed is the first item, no changes
+	  // Reorder according to the count variable
+	  // Get a pointer to the previous element
+	  Link<E>* prev = getPrev();
+	  if (prev->count >= curr->count && curr->next->count <= curr->count) return;
+	  Link<E>* tempPrev = prev;
+	  Link<E>* tempNext2 = curr->next;
+	  // While the previous element's count is lower, keep going left
+	  while (prev != head && prev->count < curr->count) {
+		  prev = getPrevOf(prev);
+	  }
+	  // When a suitable insertion point is found, remove curr from its original position and reinsert it
+	  Link<E>* tempNext = prev->next;
+	  prev->assignNext(curr);
+	  curr->assignNext(tempNext);
+	  tempPrev->assignNext(tempNext2);
+
+	  // Reassign the tail
+	  moveToPos(cnt);
+	  tail = curr;
+	  tail->assignNext(NULL);
 	  return;
   }
 
@@ -173,6 +208,14 @@ public:
 	  // March down list until we find the previous element
 	  while (temp->next != curr) temp = temp->next;
 	  return temp;
+  }
+
+  Link<E> * getPrevOf(Link<E>* temp) {
+	  if (temp == head) return head;       // No previous element
+	  Link<E>* temp2 = head;
+	  // March down list until we find the previous element
+	  while (temp2->next != temp) temp2 = temp2->next;
+	  return temp2;
   }
 
   Link<E> * getTwoPrev() {
