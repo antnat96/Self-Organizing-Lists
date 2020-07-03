@@ -26,24 +26,44 @@ private:
 	int compareCount[3];
 	int listSize;
 	
-	void reorder(int i) {
-		if (i == 0) reorderCount();
-		else if (i == 1) reorderMTF();
-		else if (i == 2) reorderTranspose();
+	void reorder(int i, const E& it, int pos = 0) {
+		if (i == 0) {
+			// Go to the front
+			list[0]->moveToStart();
+			// Reorder the list
+			// Reorder the list
+			reorderCount(it);
+		}
+		else if (i == 1) {
+			list[1]->moveToStart();
+			reorderMTF(pos);
+		}
+		else if (i == 2) {
+			list[2]->moveToStart();
+			reorderTranspose(it);
+		}
 		return;
 	}
 
-	void reorderCount() {
-		cout << "count" << endl;
+	void reorderCount(const E& it) {
+		// if (!(list[0]->isNull())) {
+			// Move to the start of the list
+			// Increment and return the count variable for that item in the list
+			//int currCount = list[0]->incrementCount();
+			//list[0]->next();
+			//int nextCount = list[0]->getCount();
+			//if (nextCount > currCount) {
+			//}
+		// }
+		// At the end of the list, give control back to reorder() function
 		return;
 	}
 
-	void reorderMTF() {
-		cout << "mtf" << endl;
-		return;
+	void reorderMTF(int pos) {
+		
 	}
 
-	void reorderTranspose() {
+	void reorderTranspose(const E& it) {
 		cout << "Transpose" << endl;
 		return;
 	}
@@ -89,15 +109,18 @@ public:
 		else {
 			// Declare an array whose variables are of type E (char or string)
 			E val[3];
-			for (int i = 0; i < 3; i++) {
+			//for (int i = 0; i < 3; i++) {
+			for (int i = 1; i < 3; i++) {
 				// Move to the front of the lists to prepare for the search
 				list[i]->moveToStart();
 				// fill val array with the current value of the list being searched
 				val[i] = list[i]->getValue();
+				// Get the position of the found item
+				int pos = 0;
 				// Check temp against "it"
 				while (val[i] != it) {
-					// Increment compareCount
-					compareCount[i]++;
+					// Increment compareCount and pos
+					compareCount[i]++; pos++;
 					// If temp isn't it, move the linked list to the next item in the list
 					list[i]->next();
 					// Check if we've reached the end of the list, if so, add "it" to the end of the list and return false
@@ -112,7 +135,7 @@ public:
 					val[i] = list[i]->getValue();
 				}
 				// When "it" is found in a list, reorder that list according to its heuristic
-				reorder(i);
+				reorder(i, it, pos);
 				// And then continue to the next list to do the same thing
 			}
 		}		

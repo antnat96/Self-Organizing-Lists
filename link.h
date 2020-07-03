@@ -24,6 +24,16 @@ public:
 	  next = nextval; 
 	  count = 0;
   }
+  int incrementCount() {
+	  count++;
+	  return count;
+  }
+  int getCount() {
+	  return count;
+  }
+  void assignNext(Link* nextVal) {
+
+  }
 
 };
 

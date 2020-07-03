@@ -110,7 +110,11 @@ public:
   }
 
   int getCount() {
-	  return curr->count;
+	  return curr->getCount();
+  }
+
+  int incrementCount() {
+	  return curr->incrementCount();
   }
 };
 
