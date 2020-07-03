@@ -28,13 +28,13 @@ private:
 	
 	void reorder(int i, int accessedElementPos = 0) {
 		if (i == 0) {
-			//list[0]->reorderCount(accessedElementPos);
+			list[0]->reorderCount(accessedElementPos);
 		}
 		else if (i == 1) {
 			//list[1]->moveToFront(accessedElementPos);
 		}
 		else if (i == 2) {
-			list[2]->transpose(accessedElementPos);
+			//list[2]->transpose(accessedElementPos);
 		}
 		return;
 	}

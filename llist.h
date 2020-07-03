@@ -132,6 +132,41 @@ public:
 	  return;
   }
 
+  void moveToFront(int accessedElementPos) {
+	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
+	  moveToPos(accessedElementPos);
+
+	  // Get some pointers
+	  Link<E>* oneElementBeforeCurr = getPrev();
+	  Link<E>* previousStart = head->next;
+	  Link<E>* tempNext = curr->next;
+
+	  // Make the swaps
+	  curr->assignNext(previousStart);
+	  head->assignNext(curr);
+	  oneElementBeforeCurr->assignNext(tempNext);
+	  return;
+  }
+
+  void reorderCount(int accessedElementPos) {
+	  // Get to the element accessed
+	  moveToPos(accessedElementPos);
+	  // Increment the count for that item
+	  int currCount = curr->incrementCount();
+	  if (curr == head || curr == head->next) return; // Already at the head or element 1, no changes
+
+	  // Get some pointers
+	  Link<E>* oneElementBeforeCurr = getPrev();
+	  Link<E>* previousStart = head->next;
+	  Link<E>* tempNext = curr->next;
+
+	  // Make the swaps
+	  curr->assignNext(previousStart);
+	  head->assignNext(curr);
+	  oneElementBeforeCurr->assignNext(tempNext);
+	  return;
+  }
+
   Link<E> * getPrev() {
 	  if (curr == head) return head;       // No previous element
 	  Link<E>* temp = head;
