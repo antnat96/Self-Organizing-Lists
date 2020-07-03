@@ -193,9 +193,6 @@ public:
   void reorderCount(int accessedElementPos) {
 	  // Get to the item accessed
 	  moveToPos(accessedElementPos);
-	  if (accessedElementPos > 156) {
-		  int i = 0;
-	  }
 	  // Increment the count for that item
 	  int currCount = curr->incrementCount();
 	  if (curr == head || curr == head->next) return; // The item accessed is the first item, no changes
@@ -214,9 +211,6 @@ public:
 	  prev->assignNext(curr);
 	  curr->assignNext(tempNext);
 	  tempPrev->assignNext(tempNext2);
-	  if (curr == nullptr) {
-		  cout << "test" << endl;
-	  }
 
 	  // Reassign the tail
 	  moveToPos(cnt);
