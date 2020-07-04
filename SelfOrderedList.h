@@ -93,8 +93,11 @@ public:
 				// Reassign val for next iteration of while loop
 				val[i] = list[i]->getValue();
 			}
+			if (list[i]->isTail()) {
+				continue;
+			}
 			// When "it" is found in a list, reorder that list according to its heuristic
-			reorder(i, pos);
+			if (!(added)) reorder(i, pos);
 			// And then continue to the next list to do the same thing
 		}
 		// Return true if the value was previously in the list and false if it had to be added
